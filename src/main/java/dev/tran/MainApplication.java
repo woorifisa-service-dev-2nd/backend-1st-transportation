@@ -10,10 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//import dev.bank.MainApplication;
-import dev.tran.model.GaungyukBus;
-import dev.tran.model.MauelBus;
-import dev.tran.model.SineBus;
+import dev.tran.model.Bus;
 import dev.tran.model.Subway;
 import dev.tran.model.Transportation;
 import dev.tran.service.TransportationStatementProcessor;
@@ -41,9 +38,13 @@ public class MainApplication {
 		final Map<String, Integer> map = new HashMap<String, Integer>(); // 사람별 총 요금 
 
 		CSVParser parser = new CSVParser();
-		MauelBus mauelBus = new MauelBus();
-		GaungyukBus gaungyukBus = new GaungyukBus();
-		SineBus sineBus = new SineBus();
+//		MauelBus mauelBus = new MauelBus();
+//		GaungyukBus gaungyukBus = new GaungyukBus();
+//		SineBus sineBus = new SineBus();
+		
+		Bus mauelBus = new Bus("마을 버스", 1200);
+		Bus gaungyukBus = new Bus("광역 버스", 3000);
+		Bus sineBus = new Bus("시내 버스", 1500);
 		Subway subway = new Subway();
 		
 		// 2번 코드
@@ -66,25 +67,28 @@ public class MainApplication {
 					lines.add(line);
 				}
 				
+				
 				List<Transportation> transaportationTransactions = parser.parseLinesFromCSV(lines);
 				TransportationStatementProcessor tpProcessor = new TransportationStatementProcessor(transaportationTransactions);	
 				
 				// 1번. 각각의 총 교통비가 많이 나온 사용자 순서
 				map.put(name[i],
-						tpProcessor.calculateTotalFare(transaportationTransactions, mauelBus, gaungyukBus, sineBus, subway));
+						tpProcessor.calculateTotalFare(mauelBus, gaungyukBus, sineBus, subway));
 
 				// 2번. 대중교통별 최대 횟수, 이용자 이름 출력
-				maxCountForTransportations[i] = tpProcessor.calculateCountTransportation(transaportationTransactions, mauelBus,
+				maxCountForTransportations[i] = tpProcessor.calculateCountTransportation(mauelBus,
 						gaungyukBus, sineBus, subway);
 				
 				// 3번. 대중교통 전체 총액 출력
 				int[] charge = new int[4];
 				
-				charge = tpProcessor.calculateIncomeByTransport(transaportationTransactions, mauelBus, gaungyukBus, sineBus, subway);
+				charge = tpProcessor.calculateIncomeByTransport(mauelBus, gaungyukBus, sineBus, subway);
+				
+				System.out.println(charge[1]);
 			
 				// 대중교통 최종 금액 누적
 				for(int j = 0 ; j < charge.length ; j++) {
-					totalCharge[i] += charge[i];
+					totalCharge[j] += charge[j];
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

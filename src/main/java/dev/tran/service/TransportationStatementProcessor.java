@@ -2,26 +2,24 @@ package dev.tran.service;
 
 import java.util.List;
 
-import dev.tran.model.GaungyukBus;
-import dev.tran.model.MauelBus;
-import dev.tran.model.SineBus;
+import dev.tran.model.Bus;
 import dev.tran.model.Subway;
 import dev.tran.model.Transportation;
 
 public class TransportationStatementProcessor {
-	private List<Transportation> tpTransactions;
+	private List<Transportation> transaportationTransactions;
 	
-	GaungyukBus gb = new GaungyukBus();
-	MauelBus mb = new MauelBus();
-	SineBus sb = new SineBus();
+	Bus mb = new Bus("마을 버스", 1200);
+	Bus gb = new Bus("광역 버스", 3000);
+	Bus sb = new Bus("시내 버스", 1500);
 	Subway subway = new Subway();
 	
 	public TransportationStatementProcessor(List<Transportation> tpTransactions) {
-		this.tpTransactions = tpTransactions;
+		this.transaportationTransactions = tpTransactions;
 	}
 
-	public int calculateTotalFare(List<Transportation> transaportationTransactions, MauelBus mauelBus,
-			GaungyukBus gaungyukBus, SineBus sineBus, Subway subway) {
+	public int calculateTotalFare(Bus mauelBus,
+			Bus gaungyukBus, Bus sineBus, Subway subway) {
 
 		int totalCharge = 0;
 
@@ -41,8 +39,7 @@ public class TransportationStatementProcessor {
 		return totalCharge;
 	}
 	
-	public int[] calculateCountTransportation(List<Transportation> transaportationTransactions,
-			MauelBus mauelBus, GaungyukBus gaungyukBus, SineBus sineBus, Subway subway) {
+	public int[] calculateCountTransportation(Bus mauelBus, Bus gaungyukBus, Bus sineBus, Subway subway) {
 		int[] val = new int[4];
 
 		// 대중교통별 총 횟수
@@ -73,8 +70,8 @@ public class TransportationStatementProcessor {
 		return val;
 	}
 	
-	public int[] calculateIncomeByTransport(List<Transportation> transaportationTransactions, MauelBus mauelBus,
-			GaungyukBus gaungyukBus, SineBus sineBus, Subway subway) {
+	public int[] calculateIncomeByTransport(Bus mauelBus,
+			Bus gaungyukBus, Bus sineBus, Subway subway) {
 		int[] totalCharge = new int[4];
 		int totalMauelBus = 0;
 		int totalGaungyukBus = 0;
