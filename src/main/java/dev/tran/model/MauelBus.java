@@ -7,15 +7,8 @@ public class MauelBus {
 	public String getTransportationMode() {
 		return transportationMode;
 	}
-	public void setTransportationMode(String transportationMode) {
-		this.transportationMode = transportationMode;
-	}
+	
 	public int getCharge() {
 		return charge;
 	}
-	public void setCharge(int charge) {
-		this.charge = charge;
-	}
-
-	
 }

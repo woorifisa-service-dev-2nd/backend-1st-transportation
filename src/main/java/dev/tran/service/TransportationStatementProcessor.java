@@ -10,7 +10,12 @@ import dev.tran.model.Transportation;
 
 public class TransportationStatementProcessor {
 	private List<Transportation> tpTransactions;
-
+	
+	GaungyukBus gb = new GaungyukBus();
+	MauelBus mb = new MauelBus();
+	SineBus sb = new SineBus();
+	Subway subway = new Subway();
+	
 	public TransportationStatementProcessor(List<Transportation> tpTransactions) {
 		this.tpTransactions = tpTransactions;
 	}
@@ -23,13 +28,13 @@ public class TransportationStatementProcessor {
 		for (int i = 0; i < transaportationTransactions.size(); i++) {
 			String name = transaportationTransactions.get(i).getTransportationMode();
 
-			if (name.equals("마을 버스")) {
+			if (name.equals(mb.getTransportationMode())) {
 				totalCharge += mauelBus.getCharge();
-			} else if (name.equals("광역 버스")) {
+			} else if (name.equals(gb.getTransportationMode())) {
 				totalCharge += gaungyukBus.getCharge();
-			} else if (name.equals("시내 버스")) {
+			} else if (name.equals(sb.getTransportationMode())) {
 				totalCharge += sineBus.getCharge();
-			} else if (name.substring(0, 3).equals("지하철")) {
+			} else if (name.substring(0, 3).equals(subway.getTransportationMode())) {
 				totalCharge += subway.getCharge();
 			}
 		}
@@ -49,13 +54,13 @@ public class TransportationStatementProcessor {
 		for (int i = 0; i < transaportationTransactions.size(); i++) {
 			String name = transaportationTransactions.get(i).getTransportationMode();
 
-			if (name.equals("마을 버스")) {
+			if (name.equals(mb.getTransportationMode())) {
 				totalMauelBusCount++;
-			} else if (name.equals("광역 버스")) {
+			} else if (name.equals(gb.getTransportationMode())) {
 				totalGaungyukBusCount++;
-			} else if (name.equals("시내 버스")) {
+			} else if (name.equals(sb.getTransportationMode())) {
 				totalSineBusCount++;
-			} else if (name.substring(0, 3).equals("지하철")) {
+			} else if (name.substring(0, 3).equals(subway.getTransportationMode())) {
 				totalSubwayCount++;
 			}
 		}
@@ -79,13 +84,13 @@ public class TransportationStatementProcessor {
 		for (int i = 0; i < transaportationTransactions.size(); i++) {
 			String name = transaportationTransactions.get(i).getTransportationMode();
 
-			if (name.equals("마을 버스")) {
+			if (name.equals(mb.getTransportationMode())) {
 				totalMauelBus += mauelBus.getCharge();
-			} else if (name.equals("광역 버스")) {
+			} else if (name.equals(gb.getTransportationMode())) {
 				totalGaungyukBus += gaungyukBus.getCharge();
-			} else if (name.equals("시내 버스")) {
+			} else if (name.equals(sb.getTransportationMode())) {
 				totalSineBus += sineBus.getCharge();
-			} else if (name.substring(0, 3).equals("지하철")) {
+			} else if (name.substring(0, 3).equals(subway.getTransportationMode())) {
 				totalSubway += subway.getCharge();
 			}
 		}

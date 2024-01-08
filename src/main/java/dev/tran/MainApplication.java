@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +35,8 @@ public class MainApplication {
 	public static void main(String[] args) {
 //		List<Path> paths = new ArrayList<Path>(); // csv 파일 리스트
 //		List<String> fileNames = new ArrayList<String>(); // csv 파일 리스트
+		DecimalFormat decFormat = new DecimalFormat("###,###");
+		
 		String[] name = { "song", "na", "cho", "kim" }; // 사용자 배열
 		final Map<String, Integer> map = new HashMap<String, Integer>(); // 사람별 총 요금 
 
@@ -53,7 +56,7 @@ public class MainApplication {
 
 		// 각각 파일 분리
 		for (int i = 0; i < name.length; i++) {
-			try (InputStream inputStream = MainApplication.class.getClassLoader().getResourceAsStream(RESOURCES + name[i] + ".csv");
+			try (InputStream inputStream = MainApplication.class.getClassLoader().getResourceAsStream( name[i] + ".csv");
 					BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
 				
 				List<String> lines = new ArrayList<>();
@@ -110,25 +113,24 @@ public class MainApplication {
 			System.out.println("1. 폴더에 있는 csv파일들을 읽어서 각각의 총 교통비가 많이 나온 사용자 순서");
 			
 			for (String key : keySet) {
-				System.out.print("이름 : " + key);
-				System.out.println(", 요금 : " + map.get(key));
+				System.out.print("이름 : " + key + " \t");
+				System.out.println("요금 : " + decFormat.format(map.get(key)) + "원");
 			}
 
 			System.out.println("=====================================");
 			System.out.println("2. 각 교통수단별 가장 많이 탑승한 사용자");
-			System.out.println("마을 버스 : " + maxArr[0][0] + " " + maxArr[0][1] + "회 입니다.");
-			System.out.println("광역 버스 : " + maxArr[1][0] + " " + maxArr[1][1] + "회 입니다.");
-			System.out.println("시내 버스 : " + maxArr[2][0] + " " + maxArr[2][1] + "회 입니다.");
-			System.out.println("지하철 : " + maxArr[3][0] + " " + maxArr[3][1] + "회 입니다.");
+			System.out.println("마을 버스 \t : " + maxArr[0][0] + " " + maxArr[0][1] + "회 입니다.");
+			System.out.println("광역 버스 \t : " + maxArr[1][0] + " " + maxArr[1][1] + "회 입니다.");
+			System.out.println("시내 버스 \t : " + maxArr[2][0] + " " + maxArr[2][1] + "회 입니다.");
+			System.out.println("지하철 \t : " + maxArr[3][0] + " " + maxArr[3][1] + "회 입니다.");
 
 			System.out.println("=====================================");
 			System.out.println("3. 각 교통수단별 수입 계산");
-			System.out.println("마을 버스 : " + totalCharge[0] + "원 입니다.");
-			System.out.println("광역 버스 : " + totalCharge[1] + "원 입니다.");
-			System.out.println("시내 버스 : " + totalCharge[2] + "원 입니다.");
-			System.out.println("지하철 : " + totalCharge[3] + "원 입니다.");
+			System.out.println("마을 버스 \t : " + decFormat.format(totalCharge[0]) + "원 입니다.");
+			System.out.println("광역 버스 \t : " + decFormat.format(totalCharge[1]) + "원 입니다.");
+			System.out.println("시내 버스 \t : " + decFormat.format(totalCharge[2]) + "원 입니다.");
+			System.out.println("지하철 \t : " + decFormat.format(totalCharge[3]) + "원 입니다.");
 
-		
 	}
 
 }
