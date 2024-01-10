@@ -1,0 +1,18 @@
+package dev.tran.service;
+
+import java.util.Date;
+import java.util.logging.Formatter;
+import java.util.logging.LogRecord;
+
+public class MyFormatter extends Formatter {
+
+	@Override
+	public String format(LogRecord record) {
+		return record.getSourceClassName()+"\n"
+                +record.getSourceMethodName()+"\n"
+                +new Date(record.getMillis())+"\n"
+                +record.getMessage()+"\n"
+        		+"user: admin"+"\n";
+	}
+
+}
